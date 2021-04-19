@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    php:
+        build: .docker/php
+        user: dev
+        volumes:
+            - .:/var/www/project
+            - ~/.composer/cache:/home/dev/.composer/cache # Use local .composer cache and configuration
+        working_dir: /var/www/project
+
+    redis:
+        image: redis:alpine
+
+    rabbit:
+        image: rabbitmq:3-management
+        ports:
+            - 127.0.0.1:15672:15672
